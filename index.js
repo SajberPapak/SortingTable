@@ -2,12 +2,128 @@
 const usersInfo = document.querySelector(".get-users");
 const usersTable = document.querySelector(".users-table");
 const usersTableData = usersTable.querySelectorAll("td");
+const sortUsersByFirstName = document.querySelector(".sort-users-by-firstname");
+const sortUsersByLastName = document.querySelector(".sort-users-by-lastname");
+const sortUsersByCity = document.querySelector(".sort-users-by-city");
+const sortUsersByState = document.querySelector(".sort-users-by-state");
+const sortUsersByPhone = document.querySelector(".sort-users-by-phone-number");
+
+// console.log(
+//   sortUsersByFirstName,
+//   sortUsersByLastName,
+//   sortUsersByCity,
+//   sortUsersByState,
+//   sortUsersByPhone
+// );
+
+// sorted states
+
+const displaySortedStates = (sortedStates) => {
+  const forthCells = Array.from(usersTableData).filter(
+    (cell) => cell.cellIndex === 3
+  );
+  forthCells.map((cell, cellIndex) => {
+    sortedStates.map((sortedName, sortedNameIndex) => {
+      if (cellIndex === sortedNameIndex) {
+        cell.innerText = sortedName;
+      }
+    });
+  });
+  sortUsersByState.setAttribute("disabled", "");
+};
+
+sortUsersByState.addEventListener("click", () => {
+  const sortedStates = Array.from(usersTableData)
+    .filter((cell) => cell.cellIndex === 2)
+    .map((cell) => cell.textContent)
+    .sort();
+  displaySortedStates(sortedStates);
+});
+
+// Sorted cities
+
+const displaySortedCities = (sortedCities) => {
+  const thirdCells = Array.from(usersTableData).filter(
+    (cell) => cell.cellIndex === 2
+  );
+  thirdCells.map((cell, cellIndex) => {
+    sortedCities.map((sortedName, sortedNameIndex) => {
+      if (cellIndex === sortedNameIndex) {
+        cell.innerText = sortedName;
+      }
+    });
+  });
+  sortUsersByCity.setAttribute("disabled", "");
+};
+
+sortUsersByCity.addEventListener("click", () => {
+  const sortedCities = Array.from(usersTableData)
+    .filter((cell) => cell.cellIndex === 2)
+    .map((cell) => cell.textContent)
+    .sort();
+  displaySortedCities(sortedCities);
+});
+
+// Sorted last names
+
+const displaySortedLNames = (sortedLNames) => {
+  const secondCells = Array.from(usersTableData).filter(
+    (cell) => cell.cellIndex === 1
+  );
+  secondCells.map((cell, cellIndex) => {
+    sortedLNames.map((sortedName, sortedNameIndex) => {
+      if (cellIndex === sortedNameIndex) {
+        cell.innerText = sortedName;
+      }
+    });
+  });
+  sortUsersByLastName.setAttribute("disabled", "");
+};
+
+sortUsersByLastName.addEventListener("click", () => {
+  const sortedLNames = Array.from(usersTableData)
+    .filter((cell) => cell.cellIndex === 1)
+    .map((cell) => cell.textContent)
+    .sort();
+  displaySortedLNames(sortedLNames);
+});
+
+// Sorted first names
+
+const displaySortedFNames = (sortedNames) => {
+  console.log(sortedNames);
+  const firstCells = Array.from(usersTableData).filter(
+    (cell) => cell.cellIndex === 0
+  );
+  firstCells.map((cell, cellIndex) => {
+    sortedNames.map((sortedName, sortedNameIndex) => {
+      if (cellIndex === sortedNameIndex) {
+        cell.innerText = sortedName;
+      }
+    });
+  });
+  sortUsersByFirstName.setAttribute("disabled", "");
+};
+
+sortUsersByFirstName.addEventListener("click", () => {
+  const sortedFNames = Array.from(usersTableData)
+    .filter((cell) => cell.cellIndex === 0)
+    .map((cell) => cell.textContent)
+    .sort();
+  displaySortedFNames(sortedFNames);
+});
 
 // displayUsers
 
 const displayUsers = (data) => {
   const usersResults = data.results;
-  console.log(usersResults);
+
+  usersInfo.setAttribute("disabled", "");
+  sortUsersByFirstName.removeAttribute("disabled", "");
+  sortUsersByLastName.removeAttribute("disabled", "");
+  sortUsersByCity.removeAttribute("disabled", "");
+  sortUsersByState.removeAttribute("disabled", "");
+  sortUsersByPhone.removeAttribute("disabled", "");
 
   // making array for firstNames, lastNames, cities and states
 
